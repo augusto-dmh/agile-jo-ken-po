@@ -33,8 +33,6 @@
           >
             <img
               class="player-hand"
-              src="./images/rock.png"
-              alt="rock-hand"
               style="width: 75%; height: 75%"
             />
           </div>
@@ -66,8 +64,6 @@
           >
             <img
               class="ia-hand"
-              src="./images/paper.png"
-              alt="rock-hand"
               style="width: 75%; height: 75%"
             />
           </div>
@@ -75,11 +71,12 @@
       </div>
 
       <div
+        class="jokenpo-btns-wrapper"
         style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px"
       >
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+        <button type="button" class="rock-btn">Rock</button>
+        <button type="button" class="paper-btn">Paper</button>
+        <button type="button" class="scissors-btn">Scissors</button>
       </div>
 
       <div
@@ -87,17 +84,53 @@
         style="display: flex; justify-content: center"
       >
         <p
-          class="result"
+          class="resultText"
           style="
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
             font-size: 20px;
           "
-        >
-          Player won!
-        </p>
+        ></p>
       </div>
     </div>
   </head>
   <body></body>
 </html>
+
+<script>  
+  const jokenpoHands = [
+    {name: 'Rock', button: document.querySelector('.rock-btn'), winsAgainst: 'Scissors', losesAgainst: 'Paper'},
+    {name: 'Paper', button: document.querySelector('.paper-btn'), winsAgainst: 'Rock', losesAgainst: 'Scissors'},
+    {name: 'Scissors', button: document.querySelector('.scissors-btn'), winsAgainst: 'Paper', losesAgainst: 'Rock'},
+  ];
+  const resultText = document.querySelector('.resultText');
+  const playerHand = document.querySelector('.player-hand');
+  const iaHand = document.querySelector('.ia-hand');
+  
+  jokenpoHands.forEach(({button}) => {
+    button.addEventListener('click', (e) => {
+      const playerHandPlayed = jokenpoHands.find((jokenpoHand) => jokenpoHand.name === e.target.innerText);
+      const iaHandPlayed = jokenpoHands[Math.floor(Math.random() * 3)];
+
+      playerHand.setAttribute('src', `./images/${playerHandPlayed.name}.png`);
+      iaHand.setAttribute('src', `./images/${iaHandPlayed.name}.png`);
+
+      if (playerHandPlayed.name === iaHandPlayed.name) {
+        resultText.innerText = 'Draw!';
+        return;
+      }
+
+      switch (playerHandPlayed.name) {
+        case 'Rock':
+          resultText.innerText = iaHandPlayed.losesAgainst === 'Rock' ? 'Player won!' : 'IA won!';
+          break;
+        case 'Paper':
+          resultText.innerText = iaHandPlayed.losesAgainst === 'Paper' ? 'Player won!' : 'IA won!';
+          break;
+        case 'Scissors':
+          resultText.innerText = iaHandPlayed.losesAgainst === 'Scissors' ? 'Player won!' : 'IA won!';
+          break;
+      }
+    });
+  });
+</script>
