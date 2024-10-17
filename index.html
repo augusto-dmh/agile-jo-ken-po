@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agile Jo Ken Po</title>
 
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+  
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+  
+      .hand {
+        width: 75%;
+        height: 75%;
+        transition: transform 0.2s ease;
+        opacity: 0;
+        animation: fadeIn 0.2s forwards;
+      }
+  
+      .fade-out {
+        animation: fadeOut 0.2s forwards;
+      }
+    </style>
+  </head>
+
+  <body>
     <div style="display: flex; flex-direction: column; padding: 0 50px">
       <div style="display: flex; justify-content: center">
         <div class="player-wrapper" style="position: relative">
@@ -31,10 +65,7 @@
               align-items: center;
             "
           >
-            <img
-              class="player-hand"
-              style="width: 75%; height: 75%"
-            />
+            <img class="player-hand hand" />
           </div>
         </div>
 
@@ -62,10 +93,7 @@
               align-items: center;
             "
           >
-            <img
-              class="ia-hand"
-              style="width: 75%; height: 75%"
-            />
+            <img class="ia-hand hand fade-in" />
           </div>
         </div>
       </div>
@@ -93,8 +121,7 @@
         ></p>
       </div>
     </div>
-  </head>
-  <body></body>
+  </body>
 </html>
 
 <script>  
@@ -109,28 +136,47 @@
   
   jokenpoHands.forEach(({button}) => {
     button.addEventListener('click', (e) => {
-      const playerHandPlayed = jokenpoHands.find((jokenpoHand) => jokenpoHand.name === e.target.innerText);
-      const iaHandPlayed = jokenpoHands[Math.floor(Math.random() * 3)];
+      toggleHands();
 
-      playerHand.setAttribute('src', `./images/${playerHandPlayed.name}.png`);
-      iaHand.setAttribute('src', `./images/${iaHandPlayed.name}.png`);
+      setTimeout(() => {
+        const playerHandPlayed = jokenpoHands.find((jokenpoHand) => jokenpoHand.name === e.target.innerText);
+        const iaHandPlayed = jokenpoHands[Math.floor(Math.random() * 3)];
 
-      if (playerHandPlayed.name === iaHandPlayed.name) {
-        resultText.innerText = 'Draw!';
-        return;
-      }
+        playerHand.setAttribute('src', `./images/${playerHandPlayed.name}.png`);
+        iaHand.setAttribute('src', `./images/${iaHandPlayed.name}.png`);
 
-      switch (playerHandPlayed.name) {
-        case 'Rock':
-          resultText.innerText = iaHandPlayed.losesAgainst === 'Rock' ? 'Player won!' : 'IA won!';
-          break;
-        case 'Paper':
-          resultText.innerText = iaHandPlayed.losesAgainst === 'Paper' ? 'Player won!' : 'IA won!';
-          break;
-        case 'Scissors':
-          resultText.innerText = iaHandPlayed.losesAgainst === 'Scissors' ? 'Player won!' : 'IA won!';
-          break;
-      }
+        toggleHands();
+
+        if (playerHandPlayed.name === iaHandPlayed.name) {
+          resultText.innerText = 'Draw!';
+          resultText.style.color = 'yellow';
+          return;
+        }
+
+        switch (playerHandPlayed.name) {
+          case 'Rock':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'Rock' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'Rock' ? 'lightgreen' : 'lightcoral';
+            break;
+          case 'Paper':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'Paper' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'Paper' ? 'lightgreen' : 'lightcoral';
+            break;
+          case 'Scissors':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'Scissors' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'Scissors' ? 'lightgreen' : 'lightcoral';
+            break;
+          default:
+            resultText.innerText = 'Invalid choice!';
+            resultText.style.color = 'orange';
+            break;
+        }
+      }, 250);
     });
   });
+
+  function toggleHands() {
+    playerHand.classList.toggle('fade-out');
+    iaHand.classList.toggle('fade-out');
+  }
 </script>
