@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agile Jo Ken Po</title>
 
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+  
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+  
+      .hand {
+        width: 75%;
+        height: 75%;
+        transition: transform 0.2s ease;
+        opacity: 0;
+        animation: fadeIn 0.2s forwards;
+      }
+  
+      .fade-out {
+        animation: fadeOut 0.2s forwards;
+      }
+    </style>
+  </head>
+
+  <body>
     <div style="display: flex; flex-direction: column; padding: 0 50px">
       <div style="display: flex; justify-content: center">
         <div class="player-wrapper" style="position: relative">
@@ -31,12 +65,7 @@
               align-items: center;
             "
           >
-            <img
-              class="player-hand"
-              src="./images/rock.png"
-              alt="rock-hand"
-              style="width: 75%; height: 75%"
-            />
+            <img class="player-hand hand" />
           </div>
         </div>
 
@@ -64,22 +93,18 @@
               align-items: center;
             "
           >
-            <img
-              class="ia-hand"
-              src="./images/paper.png"
-              alt="rock-hand"
-              style="width: 75%; height: 75%"
-            />
+            <img class="ia-hand hand fade-in" />
           </div>
         </div>
       </div>
 
       <div
+        class="jokenpo-btns-wrapper"
         style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px"
       >
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+        <button type="button" class="rock-btn">Rock</button>
+        <button type="button" class="paper-btn">Paper</button>
+        <button type="button" class="scissors-btn">Scissors</button>
       </div>
 
       <div
@@ -87,17 +112,71 @@
         style="display: flex; justify-content: center"
       >
         <p
-          class="result"
+          class="resultText"
           style="
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
             font-size: 20px;
           "
-        >
-          Player won!
-        </p>
+        ></p>
       </div>
     </div>
-  </head>
-  <body></body>
+  </body>
 </html>
+
+<script>  
+  const jokenpoHands = [
+    {name: 'Rock', button: document.querySelector('.rock-btn'), winsAgainst: 'Scissors', losesAgainst: 'Paper'},
+    {name: 'Paper', button: document.querySelector('.paper-btn'), winsAgainst: 'Rock', losesAgainst: 'Scissors'},
+    {name: 'Scissors', button: document.querySelector('.scissors-btn'), winsAgainst: 'Paper', losesAgainst: 'Rock'},
+  ];
+  const resultText = document.querySelector('.resultText');
+  const playerHand = document.querySelector('.player-hand');
+  const iaHand = document.querySelector('.ia-hand');
+  
+  jokenpoHands.forEach(({button}) => {
+    button.addEventListener('click', (e) => {
+      toggleHands();
+
+      setTimeout(() => {
+        const playerHandPlayed = jokenpoHands.find((jokenpoHand) => jokenpoHand.name === e.target.innerText);
+        const iaHandPlayed = jokenpoHands[Math.floor(Math.random() * 3)];
+
+        playerHand.setAttribute('src', `./images/${playerHandPlayed.name}.png`);
+        iaHand.setAttribute('src', `./images/${iaHandPlayed.name}.png`);
+
+        toggleHands();
+
+        if (playerHandPlayed.name === iaHandPlayed.name) {
+          resultText.innerText = 'Draw!';
+          resultText.style.color = 'yellow';
+          return;
+        }
+
+        switch (playerHandPlayed.name) {
+          case 'Rock':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'Rock' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'Rock' ? 'lightgreen' : 'lightcoral';
+            break;
+          case 'Paper':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'Paper' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'Paper' ? 'lightgreen' : 'lightcoral';
+            break;
+          case 'Scissors':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'Scissors' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'Scissors' ? 'lightgreen' : 'lightcoral';
+            break;
+          default:
+            resultText.innerText = 'Invalid choice!';
+            resultText.style.color = 'orange';
+            break;
+        }
+      }, 250);
+    });
+  });
+
+  function toggleHands() {
+    playerHand.classList.toggle('fade-out');
+    iaHand.classList.toggle('fade-out');
+  }
+</script>
