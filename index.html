@@ -102,9 +102,9 @@
         class="jokenpo-btns-wrapper"
         style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px"
       >
-        <button type="button" class="rock-btn">Rock</button>
-        <button type="button" class="paper-btn">Paper</button>
-        <button type="button" class="scissors-btn">Scissors</button>
+        <button type="button" class="rock-btn">rock</button>
+        <button type="button" class="paper-btn">paper</button>
+        <button type="button" class="scissors-btn">scissors</button>
       </div>
 
       <div
@@ -126,9 +126,9 @@
 
 <script>  
   const jokenpoHands = [
-    {name: 'Rock', button: document.querySelector('.rock-btn'), winsAgainst: 'Scissors', losesAgainst: 'Paper'},
-    {name: 'Paper', button: document.querySelector('.paper-btn'), winsAgainst: 'Rock', losesAgainst: 'Scissors'},
-    {name: 'Scissors', button: document.querySelector('.scissors-btn'), winsAgainst: 'Paper', losesAgainst: 'Rock'},
+    {name: 'rock', button: document.querySelector('.rock-btn'), winsAgainst: 'scissors', losesAgainst: 'paper'},
+    {name: 'paper', button: document.querySelector('.paper-btn'), winsAgainst: 'rock', losesAgainst: 'scissors'},
+    {name: 'scissors', button: document.querySelector('.scissors-btn'), winsAgainst: 'paper', losesAgainst: 'rock'},
   ];
   const resultText = document.querySelector('.resultText');
   const playerHand = document.querySelector('.player-hand');
@@ -154,17 +154,17 @@
         }
 
         switch (playerHandPlayed.name) {
-          case 'Rock':
-            resultText.innerText = iaHandPlayed.losesAgainst === 'Rock' ? 'Player won!' : 'IA won!';
-            resultText.style.color = iaHandPlayed.losesAgainst === 'Rock' ? 'lightgreen' : 'lightcoral';
+          case 'rock':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'rock' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'rock' ? 'lightgreen' : 'lightcoral';
             break;
-          case 'Paper':
-            resultText.innerText = iaHandPlayed.losesAgainst === 'Paper' ? 'Player won!' : 'IA won!';
-            resultText.style.color = iaHandPlayed.losesAgainst === 'Paper' ? 'lightgreen' : 'lightcoral';
+          case 'paper':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'paper' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'paper' ? 'lightgreen' : 'lightcoral';
             break;
-          case 'Scissors':
-            resultText.innerText = iaHandPlayed.losesAgainst === 'Scissors' ? 'Player won!' : 'IA won!';
-            resultText.style.color = iaHandPlayed.losesAgainst === 'Scissors' ? 'lightgreen' : 'lightcoral';
+          case 'scissors':
+            resultText.innerText = iaHandPlayed.losesAgainst === 'scissors' ? 'Player won!' : 'IA won!';
+            resultText.style.color = iaHandPlayed.losesAgainst === 'scissors' ? 'lightgreen' : 'lightcoral';
             break;
           default:
             resultText.innerText = 'Invalid choice!';
