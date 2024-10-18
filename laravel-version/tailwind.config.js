@@ -15,6 +15,12 @@ export default {
                 lightcoral: "#f08080",
                 yellow: "#ffff00",
             },
+            backgroundColor: {
+                primary: "#353b54",
+            },
+            boxShadow: {
+                "outer-bright": "0 0 30px 0 rgba(255,255,255,0.50)",
+            },
         },
     },
 
