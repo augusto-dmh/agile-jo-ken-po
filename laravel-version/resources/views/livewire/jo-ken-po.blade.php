@@ -7,7 +7,10 @@
                 </p>
                 <div class="flex gap-2">
                     @for($i = 0; $i < $playerLife; $i++)
-                    <i class="text-red-500 fas fa-heart" wire:loading.class="fade-out"></i>
+                    <i class="text-red-500 fas fa-heart float" wire:loading.class="fade-out"></i>
+                    @endfor
+                    @for($i = 0; $i < $this->playerLifeTaken; $i++)
+                    <i class="text-black fas fa-heart" wire:loading.class="fade-out"></i>
                     @endfor
                 </div>
             </div>
@@ -23,7 +26,10 @@
                 </p>
                 <div class="flex gap-2">
                     @for($i = 0; $i < $iaLife; $i++)
-                    <i class="text-red-500 fas fa-heart" wire:loading.class="fade-out"></i>
+                    <i class="text-red-500 fas fa-heart float" wire:loading.class="fade-out"></i>
+                    @endfor
+                    @for($i = 0; $i < $this->iaLifeTaken; $i++)
+                    <i class="text-black fas fa-heart" wire:loading.class="fade-out"></i>
                     @endfor
                 </div>
             </div>

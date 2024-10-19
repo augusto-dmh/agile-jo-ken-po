@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class JoKenPo extends Component
@@ -10,8 +11,20 @@ class JoKenPo extends Component
     public $iaHand;
     public $resultText;
     public $hands;
+    public $initialPlayerLife = 5;
+    public $initialIaLife = 5;
     public $playerLife;
     public $iaLife;
+
+    #[Computed]
+    public function playerLifeTaken() {
+        return $this->initialPlayerLife - $this->playerLife;
+    }
+
+    #[Computed]
+    public function iaLifeTaken() {
+        return $this->initialIaLife - $this->iaLife;
+    }
 
     public function mount() {
         $this->hands = [
@@ -19,8 +32,10 @@ class JoKenPo extends Component
             'paper' => asset('storage/paper.png'),
             'scissors' => asset('storage/scissors.png'),
         ];
-        $this->playerLife = 5;
-        $this->iaLife = 5;
+        $this->initialPlayerLife = 5;
+        $this->initialIaLife = 5;
+        $this->playerLife = $this->initialPlayerLife;
+        $this->iaLife = $this->initialIaLife;
     }
 
     public function play($playerChoice)
@@ -71,8 +86,8 @@ class JoKenPo extends Component
     }
 
     public function retry() {
-        $this->playerLife = 5;
-        $this->iaLife = 5;
+        $this->playerLife = $this->initialPlayerLife;
+        $this->iaLife = $this->initialIaLife;
         $this->resultText = '';
     }
 
