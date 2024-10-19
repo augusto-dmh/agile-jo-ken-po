@@ -10,6 +10,8 @@ class JoKenPo extends Component
     public $iaHand;
     public $resultText;
     public $hands;
+    public $playerLife;
+    public $iaLife;
 
     public function mount() {
         $this->hands = [
@@ -17,6 +19,8 @@ class JoKenPo extends Component
             'paper' => asset('storage/paper.png'),
             'scissors' => asset('storage/scissors.png'),
         ];
+        $this->playerLife = 5;
+        $this->iaLife = 5;
     }
 
     public function play($playerChoice)
@@ -30,16 +34,46 @@ class JoKenPo extends Component
         } else {
             switch ($playerChoice) {
                 case 'rock':
-                    $this->resultText = $iaChoice === 'scissors' ? 'Player won!' : 'IA won!';
-                    break;
+                    if ($iaChoice === 'scissors') {
+                        $this->resultText = 'Player won!';
+                        $this->removeLife($this->iaHand);
+                        return;
+                    }
+                    $this->resultText = 'IA won!';
+                    $this->removeLife($this->playerHand);
+                break;
                 case 'paper':
-                    $this->resultText = $iaChoice === 'rock' ? 'Player won!' : 'IA won!';
-                    break;
+                    if ($iaChoice === 'rock') {
+                        $this->resultText = 'Player won!';
+                        $this->removeLife($this->iaHand);
+                        return;
+                    }
+                    $this->resultText = 'IA won!';
+                    $this->removeLife($this->playerHand);
+                break;
                 case 'scissors':
-                    $this->resultText = $iaChoice === 'paper' ? 'Player won!' : 'IA won!';
-                    break;
+                    if ($iaChoice === 'paper') {
+                        $this->resultText = 'Player won!';
+                        $this->removeLife($this->iaHand);
+                        return;
+                    }
+                    $this->resultText = 'IA won!';
+                    $this->removeLife($this->playerHand);
+                break;
             }
         }
+    }
+
+    public function removeLife($hand) {
+        $hand === $this->playerHand
+        ? ($this->playerLife -= 1)
+        : ($this->iaLife -= 1);
+    }
+
+    public function retry() {
+        $this->playerLife = 5;
+        $this->iaLife = 5;
+        $this->resultText = '';
     }
 
     public function render()
