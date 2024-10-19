@@ -7,12 +7,12 @@
                 </p>
                 <div class="flex gap-2">
                     @for($i = 0; $i < $playerLife; $i++)
-                    <i class="text-red-500 fas fa-heart"></i>
+                    <i class="text-red-500 fas fa-heart" wire:loading.class="fade-out"></i>
                     @endfor
                 </div>
             </div>
             <div class="flex items-center justify-center transform rotate-90 player-hand-wrapper w-72 h-72">
-                <img @if($playerHand) src="{{ $playerHand }}" @endif class="w-3/4 player-hand hand h-3/4"/>
+                <img @if($playerHand) src="{{ $playerHand }}" @endif wire:loading.class="fade-out" class="w-3/4 player-hand hand h-3/4"/>
             </div>
         </div>
 
@@ -23,12 +23,12 @@
                 </p>
                 <div class="flex gap-2">
                     @for($i = 0; $i < $iaLife; $i++)
-                    <i class="text-red-500 fas fa-heart"></i>
+                    <i class="text-red-500 fas fa-heart" wire:loading.class="fade-out"></i>
                     @endfor
                 </div>
             </div>
             <div class="flex items-center justify-center transform -rotate-90 ia-hand-wrapper w-72 h-72">
-                <img @if($iaHand) src="{{ $iaHand }}" @endif class="w-3/4 ia-hand hand h-3/4"/>
+                <img @if($iaHand) src="{{ $iaHand }}" @endif wire:loading.class="fade-out" class="w-3/4 ia-hand hand h-3/4"/>
             </div>
         </div>
     </div>
@@ -62,23 +62,3 @@
     </div>
 
 </div>
-
-@script
-<script>
-    const jokenpoBtns = Array.from(document.querySelector('.jokenpo-btns-wrapper').children);
-
-    const playerHand = document.querySelector('.player-hand');
-    const iaHand = document.querySelector('.ia-hand');
-
-    jokenpoBtns.forEach((button) => {
-        button.addEventListener('click', () => {
-            toggleHands();
-        });
-    });
-
-    function toggleHands() {
-        playerHand.classList.toggle('fade-out');
-        iaHand.classList.toggle('fade-out');
-    }
-</script>
-@endscript
