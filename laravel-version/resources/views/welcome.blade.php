@@ -20,20 +20,20 @@
             </div>
             <div class="flex justify-between gap-20 menu-modes">
                 <div class="hover:shadow-outer-bright w-44 h-44 image-wrapper">
-                    <a href="#">
+                    <a href="{{route('play-simple-mode')}}">
                         <img src="" alt="" class="w-full h-full">
                     </a>
                 </div>
 
                 <div class="hover:shadow-outer-bright w-44 h-44 image-wrapper">
-                    <a href="#">
+                    <a href="{{route('play-x-luck-mode')}}">
                         <img src="" alt="" class="w-full h-full">
                     </a>
                 </div>
             </div>
             <div class="flex flex-col gap-4 text-center menu-buttons">
-                <a href="#" class="px-24 py-2 bg-white hover:bg-slate-200 hover:shadow-outer-bright">Login</a>
-                <a href="#" class="px-24 py-2 bg-white hover:bg-slate-200 hover:shadow-outer-bright">Cadastro</a>
+                <a href="{{route('login')}}" class="px-24 py-2 bg-white hover:bg-slate-200 hover:shadow-outer-bright">Login</a>
+                <a href="{{route('register')}}" class="px-24 py-2 bg-white hover:bg-slate-200 hover:shadow-outer-bright">Cadastro</a>
             </div>
         </div>
     </body>

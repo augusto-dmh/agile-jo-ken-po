@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-center transform rotate-90 player-hand-wrapper w-72 h-72">
-                <img @if($playerHand) src="{{ $playerHand }}" @endif wire:loading.class="fade-out" class="w-3/4 player-hand hand h-3/4"/>
+                @if($playerHand) <img src="{{ $playerHand }}" wire:loading.class="fade-out" class="w-3/4 player-hand hand h-3/4"/> @endif
             </div>
         </div>
 
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-center transform -rotate-90 ia-hand-wrapper w-72 h-72">
-                <img @if($iaHand) src="{{ $iaHand }}" @endif wire:loading.class="fade-out" class="w-3/4 ia-hand hand h-3/4"/>
+                @if($iaHand) <img src="{{ $iaHand }}" wire:loading.class="fade-out" class="w-3/4 ia-hand hand h-3/4"/> @endif
             </div>
         </div>
     </div>
