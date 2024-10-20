@@ -52,3 +52,7 @@
 .fade-out {
     animation: fadeOut 0.2s forwards;
 }
+
+.fake-border {
+    box-shadow: 0 0 0 0.25px white;
+}
