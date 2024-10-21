@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -165,6 +167,11 @@ class JoKenPoXLuckMode extends Component
         $hand === $this->player['hand']
         ? ($this->player['life']['current'] -= 1)
         : ($this->ia['life']['current'] -= 1);
+
+        if ($this->player['currentLife'] < 1) {
+            $user = Auth::user();
+            $user && ($user->increment('simple_mode_victories'));
+        }
     }
 
     public function retry() {

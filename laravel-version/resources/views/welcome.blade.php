@@ -39,7 +39,8 @@
             </div>
             <div class="flex flex-col gap-4 text-center menu-buttons">
                 <a href="{{route('login')}}" class="px-24 py-2 bg-white font-pixelify hover:bg-slate-200 hover:shadow-outer-bright">Login</a>
-                <a href="{{route('register')}}" class="px-24 py-2 bg-white font-pixelify hover:bg-slate-200 hover:shadow-outer-bright">Cadastro</a>
+                <a href="{{route('register')}}" class="px-24 py-2 bg-white font-pixelify hover:bg-slate-200 hover:shadow-outer-bright">Register</a>
+                <a href="{{route('leadership')}}" class="px-24 py-2 bg-white font-pixelify hover:bg-slate-200 hover:shadow-outer-bright">Leadership</a>
             </div>
         </div>
     </body>

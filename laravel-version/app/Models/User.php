@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'simple_mode_victories',
+        'x2_luck_mode_victories',
     ];
 
     /**
