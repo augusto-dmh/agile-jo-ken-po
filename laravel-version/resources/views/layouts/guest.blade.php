@@ -18,7 +18,9 @@
         <div class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-primary">
             <div>
                 <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
+                    <a href="{{route('home')}}">
+                        <img src="{{asset('storage/logo.png')}}" class="h-28 w-52">
+                    </a>
                 </a>
             </div>
 

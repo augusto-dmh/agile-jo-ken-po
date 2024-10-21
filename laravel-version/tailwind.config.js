@@ -16,10 +16,13 @@ export default {
                 yellow: "#ffff00",
             },
             backgroundColor: {
-                primary: "#353b54",
+                primary: "#101728",
             },
             boxShadow: {
                 "outer-bright": "0 0 30px 0 rgba(255,255,255,0.50)",
+            },
+            fontFamily: {
+                pixelify: ['"Pixelify Sans"', "sans-serif"],
             },
         },
     },

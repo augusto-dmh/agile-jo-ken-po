@@ -36,8 +36,8 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <form wire:submit="register">
+<x-layouts.app>
+    <form wire:submit="register" class="font-pixelify">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -85,4 +85,4 @@ new #[Layout('layouts.guest')] class extends Component
             </x-primary-button>
         </div>
     </form>
-</div>
+</x-layouts.app>
