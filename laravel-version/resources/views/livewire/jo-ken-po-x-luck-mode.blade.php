@@ -1,63 +1,73 @@
 <div class="absolute flex flex-col px-12 transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
+    <a href="{{route('home')}}" class="absolute top-[-250px] right-[-575px]">
+        <img src="{{asset('storage/logo.png')}}" class="h-28 w-52">
+    </a>
     <div class="flex items-center justify-center">
     </div>
     <div class="flex justify-center">
         <div class="relative player-wrapper">
-            <div class="absolute transform -translate-x-1/2 left-1/2">
-                <p class="font-sans text-lg text-center text-white">
+            <div class="absolute px-8 py-4 transform border-4 rounded-full w-80 top-56 border-green-50 left-[350px]">
+                <p class="my-1 text-lg text-white font-pixelify">
                     Player
                 </p>
-                <div class="flex gap-2">
+                <div class="flex gap-1">
                     @for($i = 0; $i < $player['life']['current']; $i++)
-                    <i class="text-red-500 fas fa-heart float" wire:loading.class="fade-out"></i>
+                    <img src="{{asset('storage/heart.png')}}" class="w-6 h-5 float">
                     @endfor
                     @for($i = 0; $i < $this->playerLifeTaken; $i++)
-                    <i class="text-black fas fa-heart" wire:loading.class="fade-out"></i>
+                    <img src="{{asset('storage/heart.png')}}" class="w-6 h-5 float filter brightness-0">
                     @endfor
                 </div>
             </div>
-            <div class="relative flex items-center justify-center transform rotate-90 player-hand-wrapper w-72 h-72">
-                @if($this->showHands) <img src="{{ $player['hand'] }}" wire:loading.class="fade-out" class="w-3/4 player-hand hand h-3/4"/> @endif
+            <div class="relative flex items-center justify-center transform rotate-90 player-hand-wrapper w-72 h-72 top-64 right-48">
+                @if($this->showHands) <img src="{{ $player['hand'] }}" wire:loading.class="fade-out" class="absolute object-contain w-auto h-auto player-hand hand"/> @endif
                 @if($this->showDices) <img src="{{ $player['dice'] ?: $dices['initial'] }}" class="absolute w-28 h-28 top-72"/> @endif
             </div>
         </div>
 
         <div class="relative ia-wrapper">
-            <div class="absolute transform -translate-x-1/2 left-1/2">
-                <p class="font-sans text-lg text-center text-white">
+            <div class="absolute px-8 py-4 transform border-4 rounded-full w-80 bottom-72 border-green-50 right-96">
+                <p class="my-1 text-lg text-white font-pixelify">
                     IA
                 </p>
-                <div class="flex gap-2">
+                <div class="flex gap-1">
                     @for($i = 0; $i < $ia['life']['current']; $i++)
-                    <i class="text-red-500 fas fa-heart float" wire:loading.class="fade-out"></i>
+                    <img src="{{asset('storage/heart.png')}}" class="w-6 h-5 float">
                     @endfor
                     @for($i = 0; $i < $this->iaLifeTaken; $i++)
-                    <i class="text-black fas fa-heart" wire:loading.class="fade-out"></i>
+                    <img src="{{asset('storage/heart.png')}}" class="w-6 h-5 float filter brightness-0">
                     @endfor
                 </div>
             </div>
-            <div class="relative flex items-center justify-center transform -rotate-90 ia-hand-wrapper w-72 h-72">
-                @if($this->showHands) <img src="{{ $ia['hand'] }}" wire:loading.class="fade-out" class="w-3/4 ia-hand hand h-3/4"/> @endif
+            <div class="relative flex items-center justify-center transform -rotate-90 left-32 bottom-40 ia-hand-wrapper w-72 h-72">
+                @if($this->showHands) <img src="{{ $ia['hand'] }}" wire:loading.class="fade-out" class="absolute object-contain w-auto h-auto ia-hand hand"/> @endif
                 @if($this->showDices) <img src="{{ $ia['dice'] ?: $dices['initial'] }}" class="absolute w-28 h-28 top-72"/> @endif
             </div>
         </div>
     </div>
 
-    <div class="flex w-full max-w-2xl gap-10 m-auto mt-8 jokenpo-btns-wrapper">
-        <button type="button" wire:click="playFirstRound('rock')" @if($player['life']['current'] < 1 || $ia['life']['current'] < 1 || $this->showDices) disabled @endif class="w-full text-black bg-gray-100 rounded shadow rock-btn hover:bg-gray-200">rock</button>
-        <button type="button" wire:click="playFirstRound('paper')" @if($player['life']['current'] < 1 || $ia['life']['current'] < 1 || $this->showDices) disabled @endif class="w-full text-black bg-gray-100 rounded shadow paper-btn hover:bg-gray-200">paper</button>
-        <button type="button" wire:click="playFirstRound('scissors')" @if($player['life']['current'] < 1 || $ia['life']['current'] < 1 || $this->showDices) disabled @endif class="w-full text-black bg-gray-100 rounded shadow scissors-btn hover:bg-gray-200">scissors</button>
+    <div class="absolute flex justify-between px-8 py-4 m-auto mt-8 border-4 border-green-500 rounded-full left-[400px] top-[300px] w-80 jokenpo-btns-wrapper">
+        <button type="button" wire:click="playFirstRound('rock')" @if($player['life']['current'] < 1 || $ia['life']['current'] < 1 || $this->showDices) disabled @endif class="w-16 h-16 rock-btn">
+            <img src="{{ asset('storage/hands/player/rock.png') }}" alt="Rock" class="inline-block w-full h-full">
+        </button>
+        <button type="button" wire:click="playFirstRound('paper')" @if($player['life']['current'] < 1 || $ia['life']['current'] < 1 || $this->showDices) disabled @endif class="w-16 h-16 paper-btn">
+            <img src="{{ asset('storage/hands/player/paper.png') }}" alt="Paper" class="inline-block w-full h-full">
+        </button>
+        <button type="button" wire:click="playFirstRound('scissors')" @if($player['life']['current'] < 1 || $ia['life']['current'] < 1 || $this->showDices) disabled @endif class="w-16 h-16 scissors-btn">
+            <img src="{{ asset('storage/hands/player/scissors.png') }}" alt="Scissors" class="inline-block w-full h-full">
+        </button>
     </div>
 
-    <div class="flex flex-col items-center mt-8">
+    <div class="flex flex-col items-center mt-8 mr-32">
         <div class="py-2 text-center result-wrapper">
             <p
             @class([
-                'font-sans',
+                'font-pixelify',
                 'text-lg',
                 'text-lightgreen' => $resultText === 'Player won first round' || $resultText === 'Player attacked and damaged IA' || $resultText === 'Player defended himself against IA attack',
                 'text-lightcoral' => $resultText === 'IA won first round' || $resultText === 'IA attacked and damaged player' || $resultText === 'IA defended himself against player attack',
                 'text-yellow' => $resultText === 'Draw!',
+                'w-60'
                 ])
                 wire:loading.class="fade-out"
             >
@@ -65,9 +75,9 @@
                     {{ $resultText }}
                 @else
                     @if($winnerFirstRound && $winnerFirstRound === $player['hand'] && !($pausedTime === 'continue'))
-                        <p class='font-sans text-lg text-white'>Roll the dice to hit the AI!</p>
+                        <p class='text-lg text-white font-pixelify'>Roll the dice to hit the AI!</p>
                     @elseif($winnerFirstRound && $winnerFirstRound === $ia['hand'] && !($pausedTime === 'continue'))
-                        <p class='font-sans text-lg text-white'>Roll the dice to defend yourself against AI!</p>
+                        <p class='text-lg text-white font-pixelify'>Roll the dice to defend yourself against AI!</p>
                     @else
                         {{$player['life']['current'] < 1 && 'IA won the game.'}}
                         {{$ia['life']['current'] < 1 && 'Player won the game.'}}

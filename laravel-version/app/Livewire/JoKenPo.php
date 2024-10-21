@@ -24,9 +24,16 @@ class JoKenPo extends Component
 
     public function mount() {
         $this->hands = [
-            'rock' => asset('storage/hands/rock.png'),
-            'paper' => asset('storage/hands/paper.png'),
-            'scissors' => asset('storage/hands/scissors.png'),
+            'player' => [
+                'rock' => asset('storage/hands/player/rock.png'),
+                'paper' => asset('storage/hands/player/paper.png'),
+                'scissors' => asset('storage/hands/player/scissors.png'),
+            ],
+            'ia' => [
+                'rock' => asset('storage/hands/ia/rock.png'),
+                'paper' => asset('storage/hands/ia/paper.png'),
+                'scissors' => asset('storage/hands/ia/scissors.png'),
+            ],
         ];
         $this->player = [
             'hand' => null,
@@ -43,9 +50,9 @@ class JoKenPo extends Component
 
     public function play($playerChoice)
     {
-        $this->player['hand'] = $this->hands[$playerChoice];
-        $iaChoice = array_rand($this->hands);
-        $this->ia['hand'] = $this->hands[$iaChoice];
+        $this->player['hand'] = $this->hands['player'][$playerChoice];
+        $iaChoice = array_rand($this->hands['ia']);
+        $this->ia['hand'] = $this->hands['ia'][$iaChoice];
 
         if ($playerChoice === $iaChoice) {
             $this->resultText = 'Draw!';
