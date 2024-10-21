@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -91,6 +92,11 @@ class JoKenPo extends Component
 
     public function removeLife(&$entity) {
         $entity['currentLife'] -= 1;
+
+        if ($this->player['currentLife'] < 1) {
+            $user = Auth::user();
+            $user && ($user->increment('simple_mode_victories'));
+        }
     }
 
     public function retry() {
